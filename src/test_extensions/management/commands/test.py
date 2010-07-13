@@ -5,6 +5,8 @@ from django.core import management
 from django.conf import settings
 from django.db.models import get_app, get_apps
 from django.core.management.base import BaseCommand
+import logging
+logging.disable(logging.INFO)
 
 # Django versions prior to 1.2 don't include the DjangoTestSuiteRunner class;
 # Django versions since 1.2 include multi-database support, which doesn't play
