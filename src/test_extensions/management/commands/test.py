@@ -17,6 +17,15 @@ try:
 except ImportError:  # We are in a version prior to 1.2
     xml_runner = 'test_extensions.testrunners.xmloutput.run_tests'
 
+# Django versions prior to 1.2 don't include the DjangoTestSuiteRunner class;
+# Django versions since 1.2 include multi-database support, which doesn't play
+# nicely with the database setup in the XML test runner.
+try:
+    from django.test.simple import DjangoTestSuiteRunner
+    xml_runner = 'test_extensions.testrunners.xmloutput.XMLTestSuiteRunner'
+except ImportError:  # We are in a version prior to 1.2
+    xml_runner = 'test_extensions.testrunners.xmloutput.run_tests'
+
 skippers = []
 
 class Command(BaseCommand):
